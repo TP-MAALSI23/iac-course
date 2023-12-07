@@ -1,3 +1,8 @@
+# Provide GCP auth file
+
+you need to create a service account and create a key attached to this service account.
+There is one funcitonnal on [Trello](https://trello.com/c/ljjMGOGp/36-json-file-for-a-service-account-that-is-owner-of-the-gcp-project).
+
 # tfvars content template
 
 ```tf 
