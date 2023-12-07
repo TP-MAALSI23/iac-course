@@ -41,7 +41,7 @@ variable "default_ssh_key" {
   default     = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHGjPwGHJrvTzmPCA1+m3zCXfv5LczxfTuGPegG6hxQp"
 }
 
-variable "path_private_key" {
+variable "private_key_path" {
   description = "Path to private key for outputing SSH commands"
   type        = string
   default     = "/path/to/key"

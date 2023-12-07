@@ -15,7 +15,7 @@ network           = "default"
 
 default_user      = "maalsi23"
 # default_ssh_key   = ""
-# path_private_key  = ""
+# private_key_path  = ""
 
 tags              = ["http-server", "https-server"]
 
