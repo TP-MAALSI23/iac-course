@@ -7,3 +7,12 @@ all:
       ansible_user: ${default_user}
       ansible_ssh_private_key_file: ${private_key_path}
     %{ endfor }
+  
+  children: 
+    vms: 
+      vars:
+        ansible_ssh_common_args: '-o StrictHostKeyChecking=no'
+      hosts: 
+        %{ for vm in vm_instances }
+        ${vm.name}:
+        %{ endfor }

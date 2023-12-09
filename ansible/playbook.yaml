@@ -1,0 +1,29 @@
+- name: Remove hosts from known_hosts on localhost
+  hosts: localhost
+  gather_facts: false  # We don't need facts for this task
+
+  tasks:
+    - name: Remove hosts from known_hosts
+      known_hosts:
+        path: "~/.ssh/known_hosts"
+        name: "{{ item }}"
+        state: absent
+      with_items:
+        - "{{ groups['vms'] | map('extract', hostvars, 'ansible_host') | list }}"
+
+- hosts: vms 
+  become: true    
+
+  pre_tasks:
+    - debug:
+        msg: 'Beginning server configuration on {{ inventory_hostname }}.'
+
+  roles:
+    - role: roles/docker_install
+      when: install_docker is true
+    - role: roles/create_users
+      when: create_users is true
+
+  post_tasks:
+    - debug:
+        msg: 'Server {{ inventory_hostname }} has been configured.'

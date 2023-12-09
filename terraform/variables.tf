@@ -1,5 +1,11 @@
 # variables.tf
 
+variable "gcp_creds_path" {
+  description = "Google Cloud Platform Authentication JSON file path"
+  type        = string
+  default = "./envs/gcp-account.json"
+}
+
 variable "project_id" {
   description = "Google Cloud Platform Project ID"
   type        = string
