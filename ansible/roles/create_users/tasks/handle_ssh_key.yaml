@@ -1,0 +1,21 @@
+- name: Create output folder
+  file: 
+    path: "./{{ ssh_private_keys_destination_folder }}/{{ user.name }}"
+    state: directory
+    mode: 0755
+  become: false
+  delegate_to: localhost
+
+- name: Copy private key to output folder
+  fetch: 
+    src: "{{ user.ssh_key_file }}"
+    dest: "./{{ ssh_private_keys_destination_folder }}/{{ user.name }}/"
+    mode: 0400
+
+- name: Add public key to authorized key file
+  lineinfile:
+    path: "{{ user.home }}/.ssh/authorized_keys"
+    line: "{{ user.ssh_public_key }}"
+    create: yes
+    mode: 0644
+

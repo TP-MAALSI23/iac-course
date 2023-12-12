@@ -1,9 +1,0 @@
----
-# tasks file for create_users
-- name: Create users
-  user:
-    name: "{{ item.name }}"
-    password: "{{ item.password | password_hash('sha512') }}"
-    groups: "{{ item.groups }}"
-    state: present
-  with_items: "{{ users }}"

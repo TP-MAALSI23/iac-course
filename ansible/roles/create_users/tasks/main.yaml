@@ -1,0 +1,20 @@
+---
+# tasks file for create_users
+- name: Create users
+  user:
+    name: "{{ item.name }}"
+    password: "{{ item.password | password_hash('sha512') }}"
+    groups: "{{ item.groups }}"
+    state: present
+    generate_ssh_key: true
+    ssh_key_passphrase: "{{ item.password }}"
+    ssh_key_type: ed25519
+  with_items: "{{ users }}"
+  register: users_created
+
+
+- include_tasks: handle_ssh_key.yaml
+  with_items: 
+    - "{{ users_created.results }}"
+  loop_control:
+    loop_var: user

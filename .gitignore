@@ -19,3 +19,4 @@ terraform.rc
 #Others
 envs
 ansible/inventory.yaml
+ansible/private_keys

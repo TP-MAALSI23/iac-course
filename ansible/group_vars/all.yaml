@@ -4,22 +4,24 @@ install_docker: yes
 # Create users section
 create_users: yes
 
+# In which folder to store the ssh keys of the users created
+ssh_private_keys_destination_folder: "./private_keys"
 ## A user is composed of a name, password, and groups
 ## To be able to use sudo, a user must be in the sudo group
 ## To be able to use docker, a user must be in the docker group
 users: 
   - name: user1
-    password: password1
+    password: pwd1
     groups: 
       - sudo
       - docker
   - name: user2
-    password: password2
+    password: pwd2
     groups: 
       - sudo
       - docker
-  - name: user3
-    password: password3
-    groups: 
-      - sudo
-      - docker
+  # - name: user3
+  #   password: password3
+  #   groups: 
+  #     - sudo
+  #     - docker
