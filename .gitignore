@@ -18,3 +18,4 @@ terraform.rc
 
 #Others
 envs
+ansible/inventory.yaml
