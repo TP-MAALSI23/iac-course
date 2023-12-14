@@ -23,3 +23,36 @@
     registry_url: "{{ citation_api_config.docker.registry.url }}"
     username: "{{ citation_api_config.docker.registry.user }}"
     password: "{{ citation_api_config.docker.registry.pwd }}"
+
+- name: Apply .env templates
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: "{{ citation_api_config.user.name }}"
+    group: "{{ citation_api_config.user.name }}"
+    mode: 0644
+  with_items:
+    - { src: ".env.j2", dest: "/home/{{ citation_api_config.user.name }}/{{ project_name }}/.env" }
+
+- name: Handle SSL Cert generation
+  block: 
+
+    - name: Start nginx container
+      command: docker compose -f init-ssl-compose.yml up -d nginx
+      args:
+        chdir: "/home/{{ citation_api_config.user.name }}/{{ project_name }}"
+
+    - name: Ask certbot to generate SSL Cert
+      command: docker compose -f init-ssl-compose.yml up certbot
+      args:
+        chdir: "/home/{{ citation_api_config.user.name }}/{{ project_name }}"
+
+    - name: Stop containers
+      command: docker compose -f init-ssl-compose.yml kill
+      args:
+        chdir: "/home/{{ citation_api_config.user.name }}/{{ project_name }}"
+
+- name: Start API
+  command: docker compose up -d
+  args:
+    chdir: "/home/{{ citation_api_config.user.name }}/{{ project_name }}"

@@ -58,3 +58,8 @@ citation_api_config:
       url: https://ghcr.io
       user: willem.houm@gmail.com
       pwd: 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
+  app_env: 
+    APP_ENV: dev
+    APP_PORT: 80
+    DOMAIN: tpmaalsi23.xyz
+    EMAIL: willem.houm@gmail.com

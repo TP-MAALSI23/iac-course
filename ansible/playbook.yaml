@@ -29,6 +29,9 @@
     - role: geerlingguy.git
       when: common.install_git is true
 
+    - role: roles/create_users
+      when: create_users.enable is true
+    
     - role: roles/citation_api_config
       when: citation_api_config.enable is true
 
