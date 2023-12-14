@@ -7,7 +7,6 @@ all:
       ansible_user: ${default_user}
       ansible_ssh_private_key_file: ${private_key_path}
     %{ endfor }
-  
   children: 
     vms: 
       vars:

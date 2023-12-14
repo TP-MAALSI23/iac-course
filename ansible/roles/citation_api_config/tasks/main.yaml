@@ -1,0 +1,25 @@
+---
+
+- name: Check Docker is accessible
+  command: docker info
+  register: docker_info
+  ignore_errors: true
+
+- debug: 
+    msg: "{{ docker_info.rc }}"
+
+- when: docker_info.rc != 0
+  fail:
+    msg: "Docker is not accessible. Please install Docker on the target host."
+
+- name: Clone a private repository into folder.
+  git:
+    repo: "{{ citation_api_config.git.repo }}"
+    dest: "/home/{{ citation_api_config.user.name }}/{{ project_name }}"
+    accept_hostkey: yes
+
+- name: Login to GitLab Container Registry
+  docker_login:
+    registry_url: "{{ citation_api_config.docker.registry.url }}"
+    username: "{{ citation_api_config.docker.registry.user }}"
+    password: "{{ citation_api_config.docker.registry.pwd }}"

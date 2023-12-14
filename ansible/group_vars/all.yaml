@@ -1,27 +1,60 @@
-# Install Docker section
-install_docker: yes 
+######################
+### Common section ###
+######################
+common: 
+  install_git: yes
+  install_docker: yes
+#########################################
+### Install Docker role configuration ###
+#########################################
+# install_docker:
+#   enable: yes
 
-# Create users section
-create_users: yes
+#######################################
+### Create users role configuration ###
+#######################################
+create_users: 
+  enable: yes
+  # In which folder to store the ssh keys of the users created
+  private_key_dest: "./private_keys"
 
-# In which folder to store the ssh keys of the users created
-ssh_private_keys_destination_folder: "./private_keys"
-## A user is composed of a name, password, and groups
-## To be able to use sudo, a user must be in the sudo group
-## To be able to use docker, a user must be in the docker group
-users: 
-  - name: user1
+  ## A user is composed of a name, password, and groups
+  ## To be able to use sudo, a user must be in the sudo group
+  ## To be able to use docker, a user must be in the docker group
+  users: 
+    - name: citation
+      password: pwd1 # using the user name break the role
+      groups: 
+        - sudo
+        - docker
+    # - name: user2
+    #   password: pwd2
+    #   groups: 
+    #     - sudo
+    #     - docker
+    # - name: user3
+    #   password: password3
+    #   groups: 
+    #     - sudo
+    #     - docker
+
+
+#############################
+### Configure app section ###
+#############################
+citation_api_config: 
+  enable: yes
+    # Select the target host from the terraform.tfvars file using the instances array and the name key
+  target_host: citation-api-vm
+  # the user which run the application
+  user:
+    name: citation
     password: pwd1
-    groups: 
-      - sudo
-      - docker
-  - name: user2
-    password: pwd2
-    groups: 
-      - sudo
-      - docker
-  # - name: user3
-  #   password: password3
-  #   groups: 
-  #     - sudo
-  #     - docker
+  git:
+    repo: https://github.com/TP-MAALSI23/citation-api.git
+    token: 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
+  docker:
+    registry:
+      url: https://ghcr.io
+      user: willem.houm@gmail.com
+      pwd: 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

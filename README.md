@@ -1,3 +1,15 @@
+# Dependencies
+
+Terrafor - 1.5.7
+ansible - 2.16.0
+
+## Ansible dependencies
+
+```
+ansible-galaxy role install geerlingguy.docker
+ansible-galaxy role install geerlingguy.git
+```
+
 # Lists of Steps to do manually this repo does automatically
 
 1. Creation of GCP VMs (multi)
@@ -22,3 +34,5 @@
         1. generate password protected ssh key pair for this user
         1. Add public key to authorized_keys of this user
         1. Fetch private key
+    1. Configure application
+        

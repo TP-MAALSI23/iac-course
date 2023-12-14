@@ -9,7 +9,7 @@
     generate_ssh_key: true
     ssh_key_passphrase: "{{ item.password }}"
     ssh_key_type: ed25519
-  with_items: "{{ users }}"
+  with_items: "{{ create_users.users }}"
   register: users_created
 
 

@@ -19,10 +19,18 @@
         msg: 'Beginning server configuration on {{ inventory_hostname }}.'
 
   roles:
-    - role: roles/docker_install
-      when: install_docker is true
-    - role: roles/create_users
-      when: create_users is true
+    # Archive for exemple
+    # - role: roles/docker_install
+    #   when: install_docker.enable is true
+
+    - role: geerlingguy.docker
+      when: common.install_docker is true
+
+    - role: geerlingguy.git
+      when: common.install_git is true
+
+    - role: roles/citation_api_config
+      when: citation_api_config.enable is true
 
   post_tasks:
     - debug:
