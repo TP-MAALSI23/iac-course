@@ -23,7 +23,7 @@
     # - role: roles/docker_install
     #   when: install_docker.enable is true
 
-    - role: geerlingguy.docker
+    - role: geerlingguy.docker 
       when: common.install_docker is true
 
     - role: geerlingguy.git
@@ -33,7 +33,11 @@
       when: create_users.enable is true
     
     - role: roles/citation_api_config
-      when: citation_api_config.enable is true
+      vars:
+        host_ip: "{{ hostvars[inventory_hostname]['ansible_host'] }}"
+      when: 
+        - citation_api_config.enable is true
+        - inventory_hostname == citation_api_config.target_host
 
   post_tasks:
     - debug:

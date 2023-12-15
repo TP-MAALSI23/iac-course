@@ -5,9 +5,17 @@ ansible - 2.16.0
 
 ## Ansible dependencies
 
-```
+```sh
 ansible-galaxy role install geerlingguy.docker
 ansible-galaxy role install geerlingguy.git
+ansible-galaxy collection install google.cloud
+```
+
+## Python dependencies
+
+```sh
+pip install requests
+pip install google-auth 
 ```
 
 # Lists of Steps to do manually this repo does automatically

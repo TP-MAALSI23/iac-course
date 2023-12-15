@@ -44,20 +44,22 @@ create_users:
 #############################
 citation_api_config: 
   enable: yes
-    # Select the target host from the terraform.tfvars file using the instances array and the name key
+  # Select the target host from the terraform.tfvars file using the instances array and the name key
   target_host: citation-api-vm
-  # the user which run the application
   user:
     name: citation
     password: pwd1
   git:
     repo: https://github.com/TP-MAALSI23/citation-api.git
-    token: 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
   docker:
     registry:
       url: https://ghcr.io
       user: willem.houm@gmail.com
       pwd: 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
+  gcp_config:
+    svc_acount_file: ../terraform/envs/gcp-account.json
+    project: tp-maalsi23
+    zone_name: tpmaalsi23
   app_env: 
     APP_ENV: dev
     APP_PORT: 80

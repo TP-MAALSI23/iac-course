@@ -5,9 +5,6 @@
   register: docker_info
   ignore_errors: true
 
-- debug: 
-    msg: "{{ docker_info.rc }}"
-
 - when: docker_info.rc != 0
   fail:
     msg: "Docker is not accessible. Please install Docker on the target host."
@@ -33,6 +30,23 @@
     mode: 0644
   with_items:
     - { src: ".env.j2", dest: "/home/{{ citation_api_config.user.name }}/{{ project_name }}/.env" }
+
+- name: Handle DNS Entry
+  google.cloud.gcp_dns_resource_record_set: 
+    name: "{{ citation_api_config.app_env.DOMAIN }}." 
+    managed_zone:
+      name: "{{ citation_api_config.gcp_config.zone_name }}"
+      dnsName: "{{ citation_api_config.app_env.DOMAIN }}." 
+    type: A
+    ttl: 300
+    target:
+    - "{{ host_ip }}"
+    project: "{{ citation_api_config.gcp_config.project }}"
+    auth_kind: serviceaccount
+    service_account_file: "{{ citation_api_config.gcp_config.svc_acount_file }}"
+    state: present
+  delegate_to: localhost
+  become: false
 
 - name: Handle SSL Cert generation
   block: 
