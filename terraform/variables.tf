@@ -41,7 +41,7 @@ variable "default_user" {
   default     = "maalsi23"
 }
 
-variable "default_ssh_key" {
+variable "default_public_ssh_key" {
   description = "Public SSH key to add to the VM for initial administration"
   type        = string
   default     = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHGjPwGHJrvTzmPCA1+m3zCXfv5LczxfTuGPegG6hxQp"

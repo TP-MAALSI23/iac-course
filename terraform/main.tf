@@ -29,5 +29,5 @@ resource "google_compute_instance" "vm" {
 }
 
 locals {
-  ssh_key = "${var.default_user}:${var.default_ssh_key}"
+  ssh_key = "${var.default_user}:${var.default_public_ssh_key}"
 }
