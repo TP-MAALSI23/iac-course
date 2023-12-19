@@ -1,7 +1,7 @@
 ######################
 ### Common section ###
 ######################
-common: 
+common:
   install_git: yes
   install_docker: yes
 #########################################
@@ -13,7 +13,7 @@ common:
 #######################################
 ### Create users role configuration ###
 #######################################
-create_users: 
+create_users:
   enable: yes
   # In which folder to store the ssh keys of the users created
   private_key_dest: "./private_keys"
@@ -21,20 +21,20 @@ create_users:
   ## A user is composed of a name, password, and groups
   ## To be able to use sudo, a user must be in the sudo group
   ## To be able to use docker, a user must be in the docker group
-  users: 
+  users:
     - name: citation
       password: pwd1 # using the user name break the role
-      groups: 
+      groups:
         - sudo
         - docker
     # - name: user2
     #   password: pwd2
-    #   groups: 
+    #   groups:
     #     - sudo
     #     - docker
     # - name: user3
     #   password: password3
-    #   groups: 
+    #   groups:
     #     - sudo
     #     - docker
 
@@ -42,8 +42,8 @@ create_users:
 #############################
 ### Configure app section ###
 #############################
-citation_api_config: 
-  enable: yes
+citation_api_config:
+  enable: no
   # Select the target host from the terraform.tfvars file using the instances array and the name key
   target_host: citation-api-vm
   user:
@@ -60,7 +60,7 @@ citation_api_config:
     svc_acount_file: ../terraform/envs/gcp-account.json
     project: tp-maalsi23
     zone_name: tpmaalsi23
-  app_env: 
+  app_env:
     APP_ENV: dev
     APP_PORT: 80
     DOMAIN: tpmaalsi23.xyz
