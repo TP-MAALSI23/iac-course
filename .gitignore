@@ -1,3 +1,9 @@
+# SSH keys
+.ssh
+
+# VSCode
+.vscode
+
 # Ansible
 *.retry
 ansible.log
