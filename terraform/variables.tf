@@ -68,3 +68,17 @@ variable "instances" {
   }))
   default     = []
 }
+
+variable "instance" {
+  description = "Specs of VM to be instantiated"
+  type        = object({
+    name      = string
+    disk_size = number
+    image     = string
+  })
+  default     = {
+    name      = "tp-iac-vm"
+    disk_size = 15
+    image     = "ubuntu-2304-lunar-amd64-v20231030"
+  }
+}
