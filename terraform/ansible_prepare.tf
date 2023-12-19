@@ -26,7 +26,7 @@ resource "null_resource" "ansible_playbook_exec" {
       start_time=$(date +%s)
 
       for ip in $(terraform output -json instance_ips | jq -r '.[]'); do
-        until ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ${var.private_key_path} $ip "echo SSH is ready"; do
+        until ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ${var.private_key_path} ${var.default_user}@$ip "echo SSH is ready"; do
             echo "Waiting for SSH port to be available on $ip..."
             sleep 5
 
