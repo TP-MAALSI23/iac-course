@@ -38,13 +38,13 @@ variable "network" {
 variable "default_user" {
   description = "Default SSH user"
   type        = string
-  default     = "maalsi23"
+  default     = "ben"
 }
 
 variable "default_public_ssh_key" {
   description = "Public SSH key to add to the VM for initial administration"
   type        = string
-  default     = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHGjPwGHJrvTzmPCA1+m3zCXfv5LczxfTuGPegG6hxQp"
+  default     = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINg6g8f/zuyMmJYL/PGHcZ5K6PCH193pvt1vQq8L6Pc7 root@infra-random-quote"
 }
 
 variable "private_key_path" {
