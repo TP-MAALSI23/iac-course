@@ -1,5 +1,5 @@
 - name: Create output folder
-  file: 
+  file:
     path: "./{{ create_users.private_key_dest }}/{{ user.name }}"
     state: directory
     mode: 0755
@@ -7,7 +7,8 @@
   delegate_to: localhost
 
 - name: Copy private key to output folder
-  fetch: 
+  fetch:
+    flat: yes
     src: "{{ user.ssh_key_file }}"
     dest: "./{{ create_users.private_key_dest }}/{{ user.name }}/"
     mode: 0400
